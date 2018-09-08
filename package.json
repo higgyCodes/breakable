@@ -4,14 +4,20 @@
   "description": "A react application that we will break on purpose",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint",
+    "test": "mocha --require test/helpers/setup.js",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "cover":
+      "nyc --reporter=lcov --reporter=text --reporter=html --require babel-register --extension .jsx npm test",
+    "start": "cross-env NODE_ENV=development webpack-dev-server -d"
   },
   "author": "Patrick Higgins",
   "license": "ISC",
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "unstated": "^2.1.1",
+    "unstated": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
