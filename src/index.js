@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import {Button} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import {Provider, Subscribe} from 'unstated';
 import TwitterContainer from './containers/TwitterContainer';
+import {
+  Button,
+  Header,
+  Icon,
+  Image,
+  Menu,
+  Segment,
+  Sidebar,
+  Container,
+} from 'semantic-ui-react';
 
 let twitterContainer = new TwitterContainer();
 
@@ -25,7 +34,31 @@ class Twitter extends Component {
   render() {
     return (
       <div className="app">
-        <Button>Click Here</Button>
+        <Container>
+          <Sidebar
+            as={Menu}
+            icon="labeled"
+            inverted
+            vertical
+            visible={true}
+            width="thin">
+            <Menu.Item as="a">
+              <Icon name="home" />
+              Home
+            </Menu.Item>
+            <Menu.Item as="a">
+              <Icon name="gamepad" />
+              Games
+            </Menu.Item>
+            <Menu.Item as="a">
+              <Icon name="camera" />
+              Channels
+            </Menu.Item>
+          </Sidebar>
+          <Header as={'h1'}>Does this work</Header>
+
+          <Button>Click Here</Button>
+        </Container>
       </div>
     );
   }
