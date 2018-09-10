@@ -5,20 +5,28 @@ import 'semantic-ui-css/semantic.min.css';
 import {Provider, Subscribe} from 'unstated';
 import TwitterContainer from './containers/TwitterContainer';
 
-const App = () => <Twitter />;
+let twitterContainer = new TwitterContainer();
+
+const App = () => (
+  <Provider inject={[twitterContainer]}>
+    <Subscribe to={[TwitterContainer]}>
+      {twitter => <Twitter twitter={twitter} />}
+    </Subscribe>
+  </Provider>
+);
 
 class Twitter extends Component {
+  componentDidMount() {
+    console.log('twitter', this.props.twitter);
+    this.props.twitter.retrieveTweets().then(data => {
+      console.log(data);
+    });
+  }
   render() {
     return (
-      <Provider>
-        <Subscribe to={[TwitterContainer]}>
-          {twitter => (
-            <div className="app">
-              <Button>Click Here</Button>
-            </div>
-          )}
-        </Subscribe>
-      </Provider>
+      <div className="app">
+        <Button>Click Here</Button>
+      </div>
     );
   }
 }

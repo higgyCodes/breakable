@@ -1,4 +1,5 @@
 import {Container} from 'unstated';
+import axios from 'axios';
 
 export default class TwitterContainer extends Container {
   increment() {
@@ -8,5 +9,7 @@ export default class TwitterContainer extends Container {
   decrement() {
     this.setState({count: this.state.count - 1});
   }
-  retriveTweets() {}
+  retrieveTweets() {
+    return axios.get('http://apis.is/car?number=aa031');
+  }
 }
