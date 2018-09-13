@@ -14,18 +14,21 @@ import {
   Container,
 } from 'semantic-ui-react';
 
+import Datadog from './Datadog';
+import Twitter from './Twitter';
+
 let twitterContainer = new TwitterContainer();
-const ROUTES = ['twitter', 'monitoring'];
+const ROUTES = ['twitter', 'datadog'];
 
 const App = () => (
   <Provider inject={[twitterContainer]}>
     <Subscribe to={[TwitterContainer]}>
-      {twitter => <Twitter twitter={twitter} />}
+      {twitter => <AppMenu twitter={twitter} />}
     </Subscribe>
   </Provider>
 );
 
-class Twitter extends Component {
+class AppMenu extends Component {
   constructor(props) {
     super();
     console.log(props);
@@ -36,8 +39,6 @@ class Twitter extends Component {
 
   componentDidMount() {
     const tester = process.env.GOOGLE_MAPS_API_KEY;
-    console.log('not working', tester);
-    console.log('twitter', this.props.twitter);
     this.props.twitter.retrieveTweets().then(data => {
       console.log(data);
     });
@@ -61,40 +62,11 @@ class Twitter extends Component {
           </Menu.Item>
         </Menu>
         <Container>
-          {this.state.route === ROUTES[0] ? <Primary /> : <Secondary />}
+          {this.state.route === ROUTES[0] ? <Twitter /> : <Datadog />}
         </Container>
       </div>
     );
   }
 }
 
-const Primary = () => {
-  return (
-    <Fragment>
-      <Header as={'h1'}>Twitter</Header>
-      <iframe
-        src="https://app.datadoghq.com/graph/embed?token=a97a9810265711839c22819143c893a91d3a5d7c2fdd6021b6fa7e672dfa4adb&height=300&width=600&legend=true"
-        width="600"
-        height="300"
-        frameborder="0"
-      />
-    </Fragment>
-  );
-};
-
-const Secondary = () => {
-  return (
-    <Fragment>
-      <Header as={'h1'}>Datadog</Header>
-      <iframe
-        src="https://app.datadoghq.com/graph/embed?token=a97a9810265711839c22819143c893a91d3a5d7c2fdd6021b6fa7e672dfa4adb&height=300&width=600&legend=true"
-        width="600"
-        height="300"
-        frameborder="0"
-      />
-    </Fragment>
-  );
-};
-
-render(React.createElement(App), document.getElementById('app'));
 render(React.createElement(App), document.getElementById('app'));
