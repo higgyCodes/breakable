@@ -10,6 +10,6 @@ export default class TwitterContainer extends Container {
     this.setState({count: this.state.count - 1});
   }
   retrieveTweets() {
-    return axios.get('http://apis.is/car?number=aa031');
+    return axios.get('http://localhost:3000/tweets');
   }
 }

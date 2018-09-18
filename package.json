@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint",
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "server": "nodemon server.js"
   },
   "author": "Patrick Higgins",
   "license": "ISC",
