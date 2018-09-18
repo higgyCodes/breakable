@@ -2,14 +2,19 @@ import {Container} from 'unstated';
 import axios from 'axios';
 
 export default class TwitterContainer extends Container {
-  increment() {
-    this.setState({count: this.state.count + 1});
+  constructor() {
+    super();
+    this.state = {
+      isLoading: false,
+      tweets: {},
+    };
   }
 
-  decrement() {
-    this.setState({count: this.state.count - 1});
-  }
   retrieveTweets() {
-    return axios.get('http://localhost:3000/tweets');
+    this.setState({isLoading: true});
+
+    return axios.get('http://localhost:3000/tweets').then(e => {
+      console.log('event', e);
+    });
   }
 }
