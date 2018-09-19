@@ -14,11 +14,13 @@ import {
 import {Subscribe} from 'unstated';
 
 import TwitterContainer from './containers/TwitterContainer';
+import PlacesContainer from './containers/PlacesContainer';
 import GoogleMaps from './GoogleMaps';
 
 class TwitterContents extends Component {
   componentDidMount() {
-    this.props.twitterContainer.retrieveTweets();
+    //    this.props.twitterContainer.retrieveTweets();
+    this.props.placesContainer.retrievePlaces();
   }
 
   render() {
@@ -26,6 +28,7 @@ class TwitterContents extends Component {
       getTweetIds,
       getTweetDetails,
     } = this.props.twitterContainer.selectors;
+    console.log('does this work here', this.props.placesContainer.state);
     return (
       <Fragment>
         <Header as={'h1'}>Twitter</Header>
@@ -70,9 +73,12 @@ const Tweet = ({id, getTweetDetails}) => {
 
 export default function() {
   return (
-    <Subscribe to={[TwitterContainer]}>
-      {twitterContainer => (
-        <TwitterContents twitterContainer={twitterContainer} />
+    <Subscribe to={[TwitterContainer, PlacesContainer]}>
+      {(twitterContainer, placesContainer) => (
+        <TwitterContents
+          twitterContainer={twitterContainer}
+          placesContainer={placesContainer}
+        />
       )}
     </Subscribe>
   );

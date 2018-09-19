@@ -7,8 +7,10 @@ import {Icon, Image, Menu, Container} from 'semantic-ui-react';
 import Datadog from './Datadog';
 import Twitter from './Twitter';
 import TwitterContainer from './containers/TwitterContainer';
+import PlacesContainer from './containers/PlacesContainer';
 
 let twitterContainer = new TwitterContainer();
+let placesContainer = new PlacesContainer();
 const ROUTES = ['twitter', 'datadog'];
 
 if ('serviceWorker' in navigator) {
@@ -33,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Provider inject={[twitterContainer]}>
+        <Provider inject={[placesContainer, twitterContainer]}>
           <Menu inverted>
             <Menu.Item>
               <Image size="mini" src="https://react.semantic-ui.com/logo.png" />

@@ -1,7 +1,8 @@
 const Hapi = require('hapi');
 const mongoose = require('mongoose');
 require('dotenv').config();
-let twitterAPI = require('node-twitter-api');
+const twitterAPI = require('node-twitter-api');
+const Wreck = require('wreck');
 let twitter;
 
 const server = new Hapi.Server({
@@ -30,6 +31,23 @@ server.route({
         (error, data, response) => (error ? reject(error) : resolve(data)),
       ),
     );
+  },
+});
+
+server.route({
+  method: 'GET',
+  path: '/places',
+  config: {
+    cors: {
+      origin: ['*'],
+      additionalHeaders: ['cache-control', 'x-requested-with'],
+    },
+  },
+  handler: async (request, h) => {
+    return await Wreck(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
+      process.env.GOOGLE
+    }
+`);
   },
 });
 

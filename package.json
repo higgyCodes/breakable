@@ -12,11 +12,19 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "dotenv": "^6.0.0",
+    "google-maps-react": "^2.0.2",
+    "h2o2": "^8.1.2",
+    "hapi": "^17.5.4",
+    "hapi-pino": "^5.1.0",
+    "mongoose": "^5.2.16",
+    "node-twitter-api": "^1.8.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
     "semantic-ui-css": "^2.3.3",
     "semantic-ui-react": "^0.82.3",
-    "unstated": "^2.1.1"
+    "unstated": "^2.1.1",
+    "wreck": "^14.1.0"
   },
   "devDependencies": {
     "enzyme": "^3.6.0",
@@ -24,6 +32,7 @@
     "eslint": "^5.5.0",
     "jest": "^23.5.0",
     "jest-in-case": "^1.0.2",
+    "nodemon": "^1.18.4",
     "parcel-bundler": "^1.9.7"
   }
 }
