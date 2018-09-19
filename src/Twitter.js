@@ -48,7 +48,6 @@ class TwitterContents extends Component {
 
 const Tweet = ({id, getTweetDetails}) => {
   const details = getTweetDetails(id);
-  console.log('details', details);
   return (
     <Segment padded key={id}>
       <Grid columns={2}>
