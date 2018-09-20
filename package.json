@@ -9,7 +9,7 @@
     "server": "nodemon server.js"
   },
   "author": "Patrick Higgins",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
