@@ -1,7 +1,7 @@
 import {Container} from 'unstated';
 import axios from 'axios';
 
-export default class TwitterContainer extends Container {
+export default class PlacesContainer extends Container {
   constructor() {
     super();
     this.state = {
@@ -19,6 +19,7 @@ export default class TwitterContainer extends Container {
     this.setState({isLoading: true});
 
     return axios.get('http://localhost:3000/places').then(res => {
+      console.log('DOES THIS WORK HERE', res.data);
       let places = {};
       let placeIds = [];
       res.data.statuses.forEach(place => {

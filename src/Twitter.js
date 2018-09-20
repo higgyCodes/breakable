@@ -19,8 +19,8 @@ import GoogleMaps from './GoogleMaps';
 
 class TwitterContents extends Component {
   componentDidMount() {
-    //    this.props.twitterContainer.retrieveTweets();
-    this.props.placesContainer.retrievePlaces();
+    const {twitterContainer} = this.props;
+    twitterContainer.retrieveTweets();
   }
 
   render() {
@@ -28,7 +28,6 @@ class TwitterContents extends Component {
       getTweetIds,
       getTweetDetails,
     } = this.props.twitterContainer.selectors;
-    console.log('does this work here', this.props.placesContainer.state);
     return (
       <Fragment>
         <Header as={'h1'}>Twitter</Header>

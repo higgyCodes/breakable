@@ -34,6 +34,12 @@ server.route({
   },
 });
 
+const findLocation = async location =>
+  await Wreck.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${location}&inputtype=textquery&fields=geometry&key=${
+    process.env.GOOGLE_PLACES_API_KEY
+  }
+`);
+
 server.route({
   method: 'GET',
   path: '/places',
@@ -44,10 +50,14 @@ server.route({
     },
   },
   handler: async (request, h) => {
-    return await Wreck(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=${
-      process.env.GOOGLE
+    console.log('REQUEST STUFF', request);
+    let test;
+    try {
+      test = await findLocation('Sydney, Australia');
+    } catch (ex) {
+      console.log(ex);
     }
-`);
+    return test.payload.toString();
   },
 });
 
