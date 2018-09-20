@@ -18,6 +18,7 @@ export default class PlacesContainer extends Container {
   retrievePlaces() {
     this.setState({isLoading: true});
 
+    console.log('DOES THIS WORK');
     return axios.get('http://localhost:3000/places').then(res => {
       console.log('DOES THIS WORK HERE', res.data);
       let places = {};

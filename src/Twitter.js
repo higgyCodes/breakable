@@ -19,8 +19,9 @@ import GoogleMaps from './GoogleMaps';
 
 class TwitterContents extends Component {
   componentDidMount() {
-    const {twitterContainer} = this.props;
+    const {twitterContainer, placesContainer} = this.props;
     twitterContainer.retrieveTweets();
+    placesContainer.retrievePlaces();
   }
 
   render() {

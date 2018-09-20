@@ -5,6 +5,17 @@ const twitterAPI = require('node-twitter-api');
 const Wreck = require('wreck');
 let twitter;
 
+const findLocation = async location => {
+  console.log('++++++++++++++++ CALL MADE +++++++++++++++++++++++');
+  const res = await Wreck.get(
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${location}&inputtype=textquery&fields=geometry&key=${
+      process.env.GOOGLE_PLACES_API_KEY
+    }
+`,
+  );
+  return res.payload.toString();
+};
+
 const server = new Hapi.Server({
   port: 3000,
   host: 'localhost',
@@ -34,11 +45,12 @@ server.route({
   },
 });
 
-const findLocation = async location =>
-  await Wreck.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${location}&inputtype=textquery&fields=geometry&key=${
-    process.env.GOOGLE_PLACES_API_KEY
-  }
-`);
+server.method('findLocation', findLocation, {
+  cache: {
+    expiresIn: 600000,
+    generateTimeout: 100,
+  },
+});
 
 server.route({
   method: 'GET',
@@ -50,14 +62,13 @@ server.route({
     },
   },
   handler: async (request, h) => {
-    console.log('REQUEST STUFF', request);
-    let test;
+    let location;
     try {
-      test = await findLocation('Sydney, Australia');
+      location = server.methods.findLocation('Sydney, Australia');
     } catch (ex) {
       console.log(ex);
     }
-    return test.payload.toString();
+    return location;
   },
 });
 
