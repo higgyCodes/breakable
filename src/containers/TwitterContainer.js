@@ -2,14 +2,30 @@ import {Container} from 'unstated';
 import axios from 'axios';
 
 export default class TwitterContainer extends Container {
-  increment() {
-    this.setState({count: this.state.count + 1});
+  constructor() {
+    super();
+    this.state = {
+      isLoading: false,
+      tweets: {},
+      tweetIds: [],
+    };
+    this.selectors = {
+      getTweetIds: () => this.state.tweetIds || [],
+      getTweetDetails: tweetId => this.state.tweets[tweetId] || {},
+    };
   }
 
-  decrement() {
-    this.setState({count: this.state.count - 1});
-  }
   retrieveTweets() {
-    return axios.get('http://apis.is/car?number=aa031');
+    this.setState({isLoading: true});
+
+    return axios.get('http://localhost:3000/tweets').then(res => {
+      let tweets = {};
+      let tweetIds = [];
+      res.data.statuses.forEach(tweet => {
+        tweets[tweet.id] = tweet;
+        tweetIds.push(tweet.id);
+      });
+      this.setState({tweets, tweetIds, isLoading: false});
+    });
   }
 }
