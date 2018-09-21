@@ -15,19 +15,21 @@ export default class PlacesContainer extends Container {
     };
   }
 
-  retrievePlaces() {
+  retrievePlaces(mapLocations) {
     this.setState({isLoading: true});
 
-    console.log('DOES THIS WORK');
-    return axios.get('http://localhost:3000/places').then(res => {
-      console.log('DOES THIS WORK HERE', res.data);
-      let places = {};
-      let placeIds = [];
-      res.data.statuses.forEach(place => {
-        places[place.id] = tweet;
-        placeIds.push(place.id);
+    return axios
+      .post('http://localhost:3000/places', {
+        locations: mapLocations,
+      })
+      .then(res => {
+        let places = {};
+        let placeIds = [];
+        res.data.statuses.forEach(place => {
+          places[place.id] = tweet;
+          placeIds.push(place.id);
+        });
+        this.setState({places, placeIds, isLoading: false});
       });
-      this.setState({places, placeIds, isLoading: false});
-    });
   }
 }

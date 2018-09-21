@@ -53,7 +53,7 @@ server.method('findLocation', findLocation, {
 });
 
 server.route({
-  method: 'GET',
+  method: 'POST',
   path: '/places',
   config: {
     cors: {

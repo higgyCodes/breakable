@@ -20,8 +20,11 @@ import GoogleMaps from './GoogleMaps';
 class TwitterContents extends Component {
   componentDidMount() {
     const {twitterContainer, placesContainer} = this.props;
-    twitterContainer.retrieveTweets();
-    placesContainer.retrievePlaces();
+    twitterContainer.retrieveTweets().then(res => {
+      placesContainer.retrievePlaces(
+        twitterContainer.selectors.getTweetLocations(),
+      );
+    });
   }
 
   render() {
