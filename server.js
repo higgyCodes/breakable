@@ -6,13 +6,17 @@ const Wreck = require('wreck');
 let twitter;
 
 const findLocation = async location => {
-  console.log('++++++++++++++++ CALL MADE +++++++++++++++++++++++');
-  const res = await Wreck.get(
-    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${location}&inputtype=textquery&fields=geometry&key=${
-      process.env.GOOGLE_PLACES_API_KEY
-    }
+  let res;
+  try {
+    res = await Wreck.get(
+      `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${location}&inputtype=textquery&fields=geometry&key=${
+        process.env.GOOGLE_PLACES_API_KEY
+      }
 `,
-  );
+    );
+  } catch (err) {
+    console.log('Error in findLocation', err);
+  }
   return res.payload.toString();
 };
 
@@ -53,7 +57,7 @@ server.method('findLocation', findLocation, {
 });
 
 server.route({
-  method: 'POST',
+  method: 'GET',
   path: '/places',
   config: {
     cors: {
@@ -64,10 +68,11 @@ server.route({
   handler: async (request, h) => {
     let location;
     try {
-      location = server.methods.findLocation('Sydney, Australia');
+      location = server.methods.findLocation(request.url.search);
     } catch (ex) {
-      console.log(ex);
+      console.log('error on handler', ex);
     }
+
     return location;
   },
 });
