@@ -1,4 +1,5 @@
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import MapBoxMaps from './MapBoxMaps';
 import React, {Component} from 'react';
 
 export class MapContainer extends Component {
@@ -7,15 +8,24 @@ export class MapContainer extends Component {
     placesContainer.setGeocodePoll(getTweetIds, getTweetDetails);
   }
 
+  handleReady(mapProps, map) {
+    console.log('where is this', mapProps, map);
+  }
+
+  tester() {
+    console.log('anything?');
+  }
+
   render() {
     const {getPlace, getNewBounds} = this.props.placesContainer.selectors;
     const {getTweetIds, getTweetDetails} = this.props;
-
-    console.log('bounds', getNewBounds());
     return (
       <Map
         google={this.props.google}
-        zoom={14}
+        zoom={12}
+        center={getNewBounds().location}
+        onReady={this.handleReady}
+        onError={this.tester}
         style={{width: '100%', height: '60vh', position: 'relative'}}>
         {getTweetIds()
           .filter(id => (getPlace(id) || {}).location)
@@ -37,11 +47,26 @@ export class MapContainer extends Component {
   }
 }
 
-export default GoogleApiWrapper({
+const MapWrapper = GoogleApiWrapper({
   apiKey: process.env.GOOGLE_MAPS_API_KEY,
 })(MapContainer);
 
-//<Marker
-//    title={'The marker`s title will appear as a tooltip.'}
-//    name={'SOMA'}
-//    position={{lat: 37.778519, lng: -122.405640}} />
+export default class ErrorWorking extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {hasError: false};
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error, info);
+    // Display fallback UI
+    console.log('does this work', error, info);
+    this.setState({hasError: true});
+    // You can also log the error to an error reporting service
+  }
+
+  render() {
+    //return <MapBoxMaps />;
+    return <MapWrapper {...this.props} />;
+  }
+}
