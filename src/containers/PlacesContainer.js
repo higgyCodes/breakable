@@ -12,6 +12,7 @@ export default class PlacesContainer extends Container {
     this.selectors = {
       getPlaceIds: () => this.state.tweetIds || [],
       getPlace: tweetId => this.state.places[tweetId],
+      getNewBounds: tweetId => this.state.newPlace,
     };
   }
 
@@ -23,14 +24,14 @@ export default class PlacesContainer extends Container {
 
       this.retrieveNewGeocode(locationCandidate.user.location).then(
         ({data}) => {
-          const newEntry = {
-            [locationCandidate.id]:
-              (data.candidates && data.candidates[0].geometry) || {},
-          };
+          const result =
+            (data.candidates.length && data.candidates[0].geometry) || {};
 
           this.setState({
-            places: Object.assign(this.state.places, newEntry),
-            newPlace: newEntry,
+            places: Object.assign(this.state.places, {
+              [locationCandidate.id]: result,
+            }),
+            newPlace: result,
           });
         },
       );

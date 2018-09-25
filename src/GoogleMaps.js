@@ -8,24 +8,27 @@ export class MapContainer extends Component {
   }
 
   render() {
-    const {getPlace} = this.props.placesContainer.selectors;
+    const {getPlace, getNewBounds} = this.props.placesContainer.selectors;
     const {getTweetIds, getTweetDetails} = this.props;
 
+    console.log('bounds', getNewBounds());
     return (
       <Map
         google={this.props.google}
         zoom={14}
         style={{width: '100%', height: '60vh', position: 'relative'}}>
         {getTweetIds()
-          .filter(id => getPlace(id))
+          .filter(id => (getPlace(id) || {}).location)
           .map(id => {
+            // location has been sometimes undefined
             const location = getPlace(id).location;
             const userName = getTweetDetails(id).user.name;
+
             return (
               <Marker
                 title={userName}
                 name={userName}
-                position={{lat: location.lat, lng: -location.lng}}
+                position={{lat: location.lat, lng: location.lng}}
               />
             );
           })}
