@@ -7,26 +7,42 @@ export default class PlacesContainer extends Container {
     this.state = {
       isLoading: false,
       places: {},
-      placeIds: [],
+      newPlace: {},
     };
     this.selectors = {
       getPlaceIds: () => this.state.tweetIds || [],
-      getPlace: tweetId => this.state.tweets[tweetId] || {},
+      getPlace: tweetId => this.state.places[tweetId],
+      getNewBounds: tweetId => this.state.newPlace,
     };
   }
 
-  retrievePlaces() {
-    this.setState({isLoading: true});
+  setGeocodePoll(getTweetIds, getTweetDetails) {
+    this.geocodePoll = setInterval(() => {
+      const hasNoGeocode = getTweetIds().find(id => !this.state.places[id]);
+      if (!hasNoGeocode) return;
+      const locationCandidate = getTweetDetails(hasNoGeocode);
 
-    return axios.get('http://localhost:3000/places').then(res => {
-      console.log('DOES THIS WORK HERE', res.data);
-      let places = {};
-      let placeIds = [];
-      res.data.statuses.forEach(place => {
-        places[place.id] = tweet;
-        placeIds.push(place.id);
-      });
-      this.setState({places, placeIds, isLoading: false});
-    });
+      this.retrieveNewGeocode(locationCandidate.user.location).then(
+        ({data}) => {
+          const result =
+            (data.candidates.length && data.candidates[0].geometry) || {};
+
+          this.setState({
+            places: Object.assign(this.state.places, {
+              [locationCandidate.id]: result,
+            }),
+            newPlace: result,
+          });
+        },
+      );
+    }, 10000);
+  }
+
+  removeGeocodePoll() {
+    clearInterval(this.geocodePoll);
+  }
+
+  retrieveNewGeocode(mapLocation) {
+    return axios.get(`http://localhost:3000/places?${mapLocation}`);
   }
 }

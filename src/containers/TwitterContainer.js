@@ -12,6 +12,14 @@ export default class TwitterContainer extends Container {
     this.selectors = {
       getTweetIds: () => this.state.tweetIds || [],
       getTweetDetails: tweetId => this.state.tweets[tweetId] || {},
+      getTweetLocations: () =>
+        this.state.tweetIds.reduce(
+          (prev, curr) =>
+            Object.assign(prev, {
+              [curr]: this.state.tweets[curr].user.location,
+            }),
+          {},
+        ),
     };
   }
 

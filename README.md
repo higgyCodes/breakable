@@ -4,6 +4,14 @@ This project aims to assist chaos engineers in thinking about creating robust UI
 
 ## Lesson
 
+1.  Break 3rd party tool - just using the browser.
+2.  Break UI using attack on node service of production build keep service running
+3.  Break UI using attack on node service of production build and bring down api
+
+### Step 1 - Why is UI important - why may it be overlooked?
+
+UI has moved a lot in the past 5 years, the advent of single page apps has shifted a lot of state concerns to the client. In addition, the move toward progressive web app - including the shift to service workers and the possibilities that web assembly provides will increase the complexity and scope of the concerns faced by the front end.
+
 ### Step 1 - Get up and running
 
 ### Step 2 - Examining critical paths in UI design

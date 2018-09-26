@@ -19,7 +19,7 @@ import GoogleMaps from './GoogleMaps';
 
 class TwitterContents extends Component {
   componentDidMount() {
-    const {twitterContainer} = this.props;
+    const {twitterContainer, placesContainer} = this.props;
     twitterContainer.retrieveTweets();
   }
 
@@ -35,11 +35,19 @@ class TwitterContents extends Component {
           <Grid.Row>
             <Grid.Column>
               {getTweetIds().map(id => (
-                <Tweet id={id} getTweetDetails={getTweetDetails} />
+                <Tweet key={id} id={id} getTweetDetails={getTweetDetails} />
               ))}
             </Grid.Column>
             <Grid.Column>
-              <GoogleMaps />
+              <Subscribe to={[PlacesContainer]}>
+                {placesContainer => (
+                  <GoogleMaps
+                    getTweetIds={getTweetIds}
+                    placesContainer={placesContainer}
+                    getTweetDetails={getTweetDetails}
+                  />
+                )}
+              </Subscribe>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -51,7 +59,7 @@ class TwitterContents extends Component {
 const Tweet = ({id, getTweetDetails}) => {
   const details = getTweetDetails(id);
   return (
-    <Segment padded key={id}>
+    <Segment padded>
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column width={3}>
@@ -73,11 +81,8 @@ const Tweet = ({id, getTweetDetails}) => {
 export default function() {
   return (
     <Subscribe to={[TwitterContainer, PlacesContainer]}>
-      {(twitterContainer, placesContainer) => (
-        <TwitterContents
-          twitterContainer={twitterContainer}
-          placesContainer={placesContainer}
-        />
+      {twitterContainer => (
+        <TwitterContents twitterContainer={twitterContainer} />
       )}
     </Subscribe>
   );
