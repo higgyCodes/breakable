@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint",
     "start": "parcel src/index.html",
-    "server": "nodemon server.js"
+    "server": "node server.js",
+    "server-dev": "nodemon server.js"
   },
   "author": "Patrick Higgins",
   "license": "MIT",
@@ -17,7 +18,7 @@
     "h2o2": "^8.1.2",
     "hapi": "^17.5.4",
     "hapi-pino": "^5.1.0",
-    "mapbox-gl": "^0.49.0",
+    "mapbox-gl": "^0.48.0",
     "mongoose": "^5.2.16",
     "node-twitter-api": "^1.8.0",
     "react": "^16.5.2",
@@ -29,6 +30,7 @@
     "wreck": "^14.1.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "eslint": "^5.5.0",

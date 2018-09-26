@@ -1,5 +1,4 @@
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import MapBoxMaps from './MapBoxMaps';
 import React, {Component} from 'react';
 
 export class MapContainer extends Component {
@@ -8,12 +7,8 @@ export class MapContainer extends Component {
     placesContainer.setGeocodePoll(getTweetIds, getTweetDetails);
   }
 
-  handleReady(mapProps, map) {
-    console.log('where is this', mapProps, map);
-  }
-
-  tester() {
-    console.log('anything?');
+  componentWillUnmount() {
+    this.props.placesContainer.removeGeocodePoll();
   }
 
   render() {
@@ -47,26 +42,6 @@ export class MapContainer extends Component {
   }
 }
 
-const MapWrapper = GoogleApiWrapper({
+export default GoogleApiWrapper({
   apiKey: process.env.GOOGLE_MAPS_API_KEY,
 })(MapContainer);
-
-export default class ErrorWorking extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {hasError: false};
-  }
-
-  componentDidCatch(error, info) {
-    console.log(error, info);
-    // Display fallback UI
-    console.log('does this work', error, info);
-    this.setState({hasError: true});
-    // You can also log the error to an error reporting service
-  }
-
-  render() {
-    //return <MapBoxMaps />;
-    return <MapWrapper {...this.props} />;
-  }
-}

@@ -15,7 +15,9 @@ import {Subscribe} from 'unstated';
 
 import TwitterContainer from './containers/TwitterContainer';
 import PlacesContainer from './containers/PlacesContainer';
+import Mapbox from './Mapbox';
 import GoogleMaps from './GoogleMaps';
+import ErrorBoundary from './ErrorBoundary';
 
 class TwitterContents extends Component {
   componentDidMount() {
@@ -41,11 +43,20 @@ class TwitterContents extends Component {
             <Grid.Column>
               <Subscribe to={[PlacesContainer]}>
                 {placesContainer => (
-                  <GoogleMaps
-                    getTweetIds={getTweetIds}
-                    placesContainer={placesContainer}
-                    getTweetDetails={getTweetDetails}
-                  />
+                  <ErrorBoundary
+                    fallback={
+                      <GoogleMaps
+                        getTweetIds={getTweetIds}
+                        placesContainer={placesContainer}
+                        getTweetDetails={getTweetDetails}
+                      />
+                    }>
+                    <Mapbox
+                      getTweetIds={getTweetIds}
+                      placesContainer={placesContainer}
+                      getTweetDetails={getTweetDetails}
+                    />
+                  </ErrorBoundary>
                 )}
               </Subscribe>
             </Grid.Column>
