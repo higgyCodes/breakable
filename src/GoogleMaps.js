@@ -8,12 +8,8 @@ export class MapContainer extends Component {
     placesContainer.setGeocodePoll(getTweetIds, getTweetDetails);
   }
 
-  handleReady(mapProps, map) {
-    console.log('where is this', mapProps, map);
-  }
-
-  tester() {
-    console.log('anything?');
+  componentWillUnmount() {
+    this.props.placesContainer.removeGeocodePoll();
   }
 
   render() {
