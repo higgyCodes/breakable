@@ -1,22 +1,21 @@
-const PRECACHE = 'precache-v1';
+const CACHE = 'cache-v1';
 const RUNTIME = 'runtime';
-
-// A list of local resources we always want to be cached.
-const PRECACHE_URLS = ['index.html', 'index.js'];
 
 // The install handler takes care of precaching the resources we always need.
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches
-      .open(PRECACHE)
-      .then(cache => cache.addAll(PRECACHE_URLS))
-      .then(self.skipWaiting()),
-  );
+  event.waitUntil(precache());
 });
+
+function precache() {
+  return caches.open(CACHE).then(function(cache) {
+    return cache.addAll(['index.html', 'index.js']);
+  });
+}
 
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate', event => {
-  const currentCaches = [PRECACHE, RUNTIME];
+  const currentCaches = [CACHE, RUNTIME];
+  console.log('cache stuff here', caches);
   event.waitUntil(
     caches
       .keys()
@@ -36,28 +35,27 @@ self.addEventListener('activate', event => {
   );
 });
 
-// The fetch handler serves responses for same-origin resources from a cache.
-// If no response is found, it populates the runtime cache with the response
-// from the network before returning it to the page.
-self.addEventListener('fetch', event => {
-  // Skip cross-origin requests, like those for Google Analytics.
-  if (event.request.url.startsWith(self.location.origin)) {
-    event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-
-        return caches.open(RUNTIME).then(cache => {
-          console.log(event);
-          return fetch(event.request).then(response => {
-            // Put a copy of the response in the runtime cache.
-            return cache.put(event.request, response.clone()).then(() => {
-              return response;
-            });
-          });
-        });
-      }),
-    );
-  }
+self.addEventListener('fetch', function(evt) {
+  evt.respondWith(fromCache(evt.request));
+  evt.waitUntil(update(evt.request, evt));
 });
+
+function fromCache(request) {
+  return caches.open(CACHE).then(function(cache) {
+    console.log('CACHE', cache);
+    return cache.match(request).then(function(matching) {
+      //console.log('MATCHING REQUEST', matching);
+      return matching || Promise.reject('no-match');
+    });
+  });
+}
+
+function update(request, evt) {
+  return caches.open(CACHE).then(function(cache) {
+    return fetch(request).then(function(response) {
+      console.log('The service worker is serving the asset.');
+      console.log(response);
+      return cache.put(request, response);
+    });
+  });
+}
