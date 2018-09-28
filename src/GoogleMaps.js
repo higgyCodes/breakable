@@ -1,8 +1,5 @@
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import MapBoxMaps from './MapBoxMaps';
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import React, {Component} from 'react';
-
-console.log('does this work', process.env);
 
 export class MapContainer extends Component {
   componentDidMount() {

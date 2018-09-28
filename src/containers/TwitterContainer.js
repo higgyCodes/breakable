@@ -21,6 +21,7 @@ export default class TwitterContainer extends Container {
           {},
         ),
     };
+    this.retrieveTweets = this.retrieveTweets.bind(this);
   }
 
   retrieveTweets() {

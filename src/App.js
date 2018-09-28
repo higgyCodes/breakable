@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {render} from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {Provider} from 'unstated';
