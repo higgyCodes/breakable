@@ -1,9 +1,9 @@
 import ReactMapboxGl, {Layer, Feature} from 'react-mapbox-gl';
 import React, {Component} from 'react';
 
-console.log('mapbox key', process.env.MAPBOX_KEY);
 const Map = ReactMapboxGl({
-  accessToken: process.env.MAPBOX_KEY,
+  mapboxApiAccessToken: process.env.REACT_APP_MAPBOX_KEY,
+  accessToken: process.env.REACT_APP_MAPBOX_KEY,
 });
 export default class MapContainer extends Component {
   render() {

@@ -1,13 +1,9 @@
-import ReactMapboxGl, {Layer, Feature, Cluster, Marker} from 'react-mapbox-gl';
 import React, {Component} from 'react';
+import ReactMapGL from 'react-map-gl';
 
-const Map = ReactMapboxGl({
-  accessToken: process.env.MAPBOX_KEY,
-});
-
-const clusterMarker = coordinates => (
-  <Marker coordinates={coordinates}>C</Marker>
-);
+//const clusterMarker = coordinates => (
+//  <Marker coordinates={coordinates}>C</Marker>
+//);
 
 export default class MapBox extends Component {
   componentDidMount() {
@@ -20,32 +16,20 @@ export default class MapBox extends Component {
   }
 
   handleError(error) {
-    this.state.error = true;
+    console.log('did this work here');
   }
 
   render() {
     const {getPlace, getNewBounds} = this.props.placesContainer.selectors;
     const {getTweetIds, getTweetDetails} = this.props;
     return (
-      <Map
-        style="mapbox://styles/mapbox/streets-v8"
-        containerStyle={{width: '100%', height: '60vh', position: 'relative'}}
-        center={getNewBounds().location}
-        onError={this.handleError}>
-        <Cluster ClusterMarkerFactory={clusterMarker}>
-          {getTweetIds()
-            .filter(id => (getPlace(id) || {}).location)
-            .map(id => {
-              const location = getPlace(id).location;
-              const userName = getTweetDetails(id).user.name;
-              return (
-                <Marker key={id} coordinates={[location.lat, location.long]}>
-                  M
-                </Marker>
-              );
-            })}
-        </Cluster>
-      </Map>
+      <ReactMapGL
+        width={500}
+        height={400}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY}
+        mapStyle="mapbox://styles/mapbox/streets-v8"
+        error={this.handleError}
+      />
     );
   }
 }

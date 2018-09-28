@@ -16,7 +16,7 @@ const Secondary = () => {
       <Header as={'h1'}>Datadog</Header>
       <iframe
         src={`https://app.datadoghq.com/graph/embed?token=${
-          process.env.DATADOG_TOKEN
+          process.env.REACT_APP_DATADOG_TOKEN
         }&height=300&width=600&legend=true`}
         width="600"
         height="300"

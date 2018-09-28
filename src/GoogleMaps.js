@@ -2,6 +2,8 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import MapBoxMaps from './MapBoxMaps';
 import React, {Component} from 'react';
 
+console.log('does this work', process.env);
+
 export class MapContainer extends Component {
   componentDidMount() {
     const {placesContainer, getTweetIds, getTweetDetails} = this.props;
@@ -44,7 +46,7 @@ export class MapContainer extends Component {
 }
 
 const MapWrapper = GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_MAPS_API_KEY,
+  apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
 })(MapContainer);
 
 export default class ErrorWorking extends React.Component {
