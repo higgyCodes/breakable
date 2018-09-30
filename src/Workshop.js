@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Header, Image, Segment, Grid, List} from 'semantic-ui-react';
+import {Header, Grid} from 'semantic-ui-react';
 import {Subscribe} from 'unstated';
 
 import TwitterContainer from './containers/TwitterContainer';
@@ -23,6 +23,8 @@ export default class TwitterContents extends Component {
                     getTweetIds={twitterContainer.selectors.getTweetIds}
                     getTweetDetails={twitterContainer.selectors.getTweetDetails}
                     retrieveTweets={twitterContainer.retrieveTweets}
+                    setTwitterPoll={twitterContainer.setTwitterPoll}
+                    removeTwitterPoll={twitterContainer.removeTwitterPoll}
                   />
                 )}
               </Subscribe>

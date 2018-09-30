@@ -5,7 +5,7 @@ import {Provider} from 'unstated';
 import {Icon, Image, Menu, Container} from 'semantic-ui-react';
 
 import Datadog from './Datadog';
-import Twitter from './Twitter';
+import Workshop from './Workshop';
 import TwitterContainer from './containers/TwitterContainer';
 import PlacesContainer from './containers/PlacesContainer';
 
@@ -33,14 +33,14 @@ class App extends Component {
               <Icon name="sidebar" />
             </Menu.Item>
             <Menu.Item onClick={() => this.setState({route: ROUTES[0]})}>
-              Twitter
+              Workshop
             </Menu.Item>
             <Menu.Item onClick={() => this.setState({route: ROUTES[1]})}>
               Datadog
             </Menu.Item>
           </Menu>
           <Container>
-            {this.state.route === ROUTES[0] ? <Twitter /> : <Datadog />}
+            {this.state.route === ROUTES[0] ? <Workshop /> : <Datadog />}
           </Container>
         </Provider>
       </div>

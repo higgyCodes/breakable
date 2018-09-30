@@ -15,35 +15,12 @@ This project aims to assist chaos engineers in thinking about creating robust UI
 In the beginning we had [spacejam](https://www.warnerbros.com/archive/spacejam/movie/jam.htm) and [Bob Dole](http://www.dolekemp96.org/). These were sites that are essentially devoid of any javascript and relied on html sent from a server. The only state on a website was contained within form input fields. Compariatively, the state management concerns and the associated complexity of javascript applications today have barely any respemblance to the website experiences of yesteryear. The introduction of single page applications (SPAs) as well as dramatic increase in the capabilities of the browser mean that the state management concerns for a user session have moved in a large part, from the server to the client.
 A recent example would be the introduction of [codesandbox](https://twitter.com/CompuIves/status/1045393192114409473) which allows developers to write, share and execute code on the cloud.
 
-### Whats next?
+### Whats happening?
 
 * [WebAssembly](https://webassembly.org/)
-    * A target to things.
+  * A target to things.
 * [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
-* [HTTP/2.0](https://en.wikipedia.org/wiki/HTTP/2)
-* [Micro Frameworks](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
-
-## Chapter 2 - User Experiences
-
-###Primary and Secondary Concerns in a View.
-
-Users always have a motive for loading a page in their browser. In thinking about creating a robust UI, it's important to seperate that motive from supplimentary information that, though useful to them, is not imperitive to the outcome they seek.
-
-
-
-
-https://serviceworke.rs/
-
-
-### Where we came from, where we are going...
-
-In the beginning we had [spacejam](https://www.warnerbros.com/archive/spacejam/movie/jam.htm) and [Bob Dole](http://www.dolekemp96.org/). These were sites that are essentially devoid of any javascript and relied on the server to manage state. Compariatively, the state management concerns and the associated complexity of javascript applications today have barely any respemblance to the website experiences of yesteryear. The introduction of single page applications (SPAs) as well as dramatic increase in the capabilities of the browser mean that the state management concerns for a user session have moved in a large part, from the server to the client. A recent example would be the introduction of [codesandbox](https://twitter.com/CompuIves/status/1045393192114409473) which allows developers to write, share and execute code on the cloud.
-
-### Whats next?
-
-* [WebAssembly](https://webassembly.org/)
-    * A target to things.
-* [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+  * serviceworke.rs
 * [HTTP/2.0](https://en.wikipedia.org/wiki/HTTP/2)
 * [Micro Frameworks](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
 
@@ -54,19 +31,24 @@ In the beginning we had [spacejam](https://www.warnerbros.com/archive/spacejam/m
 Users always have a motive for loading a page in their browser. In thinking about creating a robust UI, it's important to seperate that motive from supplimentary information that, though useful to them, is not imperitive to the outcome they seek. Some infomation can be ommitted if unavailable or treated differently. For critical paths where omission is obviously not a possibility, suggesting alternative ways for the user to accomplish their objective may be possible or some apology and admission of failure.
 
 #### Netflix Targeted Content
-![Netflix Targeted Content](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/targeted_content.png "Targeted Content from Netflix UI")
+
+![Netflix Targeted Content](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/targeted_content.png 'Targeted Content from Netflix UI')
 
 #### Netflix Generic Content
-![Netflix Generic Content](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/generic_content.png "Generic Content from Netflix UI")
+
+![Netflix Generic Content](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/generic_content.png 'Generic Content from Netflix UI')
 
 #### A Healthy Experience
-![Twitter Healthy Card](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/twitter_card.png "A Healthy Experience")
+
+![Twitter Healthy Card](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/twitter_card.png 'A Healthy Experience')
 
 #### A Bad Degredation Experience
-![Twitter Bad Degredation](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/bad_twitter_card.png "A Bad Experience")
+
+![Twitter Bad Degredation](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/bad_twitter_card.png 'A Bad Experience')
 
 #### A Good Degredation In Context
-![Twitter Feed](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/twitter_feed.png "A Good Degredation in Context")
+
+![Twitter Feed](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/twitter_feed.png 'A Good Degredation in Context')
 
 ## Chapter 3 - Building the Dashboard
 
@@ -75,20 +57,21 @@ Here we will build out a monitoring dashboard using widgets supplied from datado
 ## Chapter 4 - Buildling Fallbacks for Critical Paths
 
 ### Third-party Assets
+
 If third party assets are being used on critical flows in the user interface, they should be consider potential weaknesses in the critical path of the application. In the event that these assets fail, the user will most likely attribute blame to your organization. Creating fallback redundencies for third-party assets may be a way to mitigate away these concerns.
 
 ### Error Boundaries
+
 [React.js](https://reactjs.org/docs/error-boundaries.html), [Ember.js](https://guides.emberjs.com/release/routing/loading-and-error-substates/#toc_error-substates) and [Vue.js](https://vuejs.org/v2/api/#errorCaptured) and [Anglular](https://angular.io/api/core/ErrorHandler) all have error handling methods to handle catching errors and providing alternative state. Today we are going to throw some errors and see what happens!
 
 ## Chapter 5 - Service Workers.
 
 https://serviceworke.rs/
 
-
 ### Chapter 6 - The Future.
 
 * Application Level Failure Injection to experiment with UI in Production
-    * The abilities to target specific clients gives us the ability to test real world scenarios with a higher degree of certainty.
+  * The abilities to target specific clients gives us the ability to test real world scenarios with a higher degree of certainty.
 * Building Robust UI in Development.
 
 ## Author

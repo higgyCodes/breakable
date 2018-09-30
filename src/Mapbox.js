@@ -39,7 +39,7 @@ export default class MapBox extends Component {
 
   render() {
     const {getPlace, getNewBounds} = this.props.placesContainer.selectors;
-    const {getTweetIds, getTweetDetails} = this.props;
+    const {getTweetIds} = this.props;
     const {lat, lng} = getNewBounds().location || {};
     return (
       <ReactMapGL
@@ -54,7 +54,6 @@ export default class MapBox extends Component {
           .filter(id => (getPlace(id) || {}).location)
           .map(id => {
             const location = getPlace(id).location;
-            const userName = getTweetDetails(id).user.name;
             return (
               <Marker key={id} latitude={location.lat} longitude={location.lng}>
                 <CityPin size={20} />

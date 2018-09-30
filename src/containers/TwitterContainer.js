@@ -22,6 +22,16 @@ export default class TwitterContainer extends Container {
         ),
     };
     this.retrieveTweets = this.retrieveTweets.bind(this);
+    this.setTwitterPoll = this.setTwitterPoll.bind(this);
+    this.removeTwitterPoll = this.removeTwitterPoll.bind(this);
+  }
+
+  setTwitterPoll() {
+    this.twitterPoll = setInterval(() => this.retrieveTweets(), 10000);
+  }
+
+  removeTwitterPoll() {
+    clearInterval(this.twitterPoll);
   }
 
   retrieveTweets() {

@@ -1,4 +1,6 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
+
+const errorMessage = <h1>Eeeeek!</h1>;
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
@@ -14,6 +16,6 @@ export default class ErrorBoundary extends Component {
   }
 
   render() {
-    return this.props.children; //this.state.hasError ? this.props.fallback : this.props.children;
+    return this.state.hasError ? errorMessage : this.props.children;
   }
 }
