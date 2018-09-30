@@ -35,25 +35,61 @@ Users always have a motive for loading a page in their browser. In thinking abou
 https://serviceworke.rs/
 
 
-UI has moved a lot in the past 5 years, the advent of single page apps has shifted a lot of state concerns to the client. In addition, the move toward progressive web app - including the shift to service workers and the possibilities that web assembly provides will increase the complexity and scope of the concerns faced by the front end.
+### Where we came from, where we are going...
 
-### Step 1 - Get up and running
+In the beginning we had [spacejam](https://www.warnerbros.com/archive/spacejam/movie/jam.htm) and [Bob Dole](http://www.dolekemp96.org/). These were sites that are essentially devoid of any javascript and relied on the server to manage state. Compariatively, the state management concerns and the associated complexity of javascript applications today have barely any respemblance to the website experiences of yesteryear. The introduction of single page applications (SPAs) as well as dramatic increase in the capabilities of the browser mean that the state management concerns for a user session have moved in a large part, from the server to the client. A recent example would be the introduction of [codesandbox](https://twitter.com/CompuIves/status/1045393192114409473) which allows developers to write, share and execute code on the cloud.
 
-### Step 2 - Examining critical paths in UI design
+### Whats next?
 
-UI views consist of data that is critical to the users goals on a particular page and supplimentary information. When thinking about the resiliency of a user interface, its important to distinguish what is critical (potentially requiring fallbacks) and what is auxiliary (information that can potentially be omitted from the view). Deciding what is critical and what is auxiliary should be discussed with product management and can fit into end to end testing plans.
+* [WebAssembly](https://webassembly.org/)
+    * A target to things.
+* [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+* [HTTP/2.0](https://en.wikipedia.org/wiki/HTTP/2)
+* [Micro Frameworks](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
 
-# Netflix Targeted Content
-![Targeted Content](https://github.com/higgyCodes/breakable/raw/master/src/public/targeted_content.png "Targeted Content from Netflix UI")
+## Chapter 2 - User Experiences
 
-# 
+### Primary and Secondary Concerns in a View.
+
+Users always have a motive for loading a page in their browser. In thinking about creating a robust UI, it's important to seperate that motive from supplimentary information that, though useful to them, is not imperitive to the outcome they seek. Some infomation can be ommitted if unavailable or treated differently. For critical paths where omission is obviously not a possibility, suggesting alternative ways for the user to accomplish their objective may be possible or some apology and admission of failure.
+
+#### Netflix Targeted Content
+![Netflix Targeted Content](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/targeted_content.png "Targeted Content from Netflix UI")
+
+#### Netflix Generic Content
+![Netflix Generic Content](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/generic_content.png "Generic Content from Netflix UI")
+
+#### A Healthy Experience
+![Twitter Healthy Card](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/twitter_card.png "A Healthy Experience")
+
+#### A Bad Degredation Experience
+![Twitter Bad Degredation](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/bad_twitter_card.png "A Bad Experience")
+
+#### A Good Degredation In Context
+![Twitter Feed](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/twitter_feed.png "A Good Degredation in Context")
+
+## Chapter 3 - Building the Dashboard
+
+Here we will build out a monitoring dashboard using widgets supplied from datadog.
+
+## Chapter 4 - Buildling Fallbacks for Critical Paths
+
+### Third-party Assets
+If third party assets are being used on critical flows in the user interface, they should be consider potential weaknesses in the critical path of the application. In the event that these assets fail, the user will most likely attribute blame to your organization. Creating fallback redundencies for third-party assets may be a way to mitigate away these concerns.
+
+### Error Boundaries
+[React.js](https://reactjs.org/docs/error-boundaries.html), [Ember.js](https://guides.emberjs.com/release/routing/loading-and-error-substates/#toc_error-substates) and [Vue.js](https://vuejs.org/v2/api/#errorCaptured) and [Anglular](https://angular.io/api/core/ErrorHandler) all have error handling methods to handle catching errors and providing alternative state. Today we are going to throw some errors and see what happens!
+
+## Chapter 5 - Service Workers.
+
+https://serviceworke.rs/
 
 
+### Chapter 6 - The Future.
 
-### Step 3 - Buildling Fallbacks for Critical Paths.
-
-Discuss error boundaries. [React.js](https://reactjs.org/docs/error-boundaries.html), [Ember.js](https://guides.emberjs.com/release/routing/loading-and-error-substates/#toc_error-substates) and [Vue.js](https://vuejs.org/v2/api/#errorCaptured) and [Anglular](https://angular.io/api/core/ErrorHandler) all have error handling methods to handle catching errors and providing alternative state.
-
+* Application Level Failure Injection to experiment with UI in Production
+    * The abilities to target specific clients gives us the ability to test real world scenarios with a higher degree of certainty.
+* Building Robust UI in Development.
 
 ## Author
 
