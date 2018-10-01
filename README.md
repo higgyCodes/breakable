@@ -24,7 +24,11 @@ A recent example would be the introduction of [codesandbox](https://twitter.com/
 * [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
   * A control mechanism for caching data and redirecting network requests
   * [serviceworke.rs](https://serviceworke.rs)
-* [HTTP/2.0](https://en.wikipedia.org/wiki/HTTP/2) \*
+* [HTTP/2.0](https://en.wikipedia.org/wiki/HTTP/2)
+  * Improved Latency
+    * Data compression for http headers
+  * Server Push
+  * Multiplexing multiple requests over TCP connectionn
 * [Micro Frameworks](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
 
 ## Chapter 2 - User Experiences
