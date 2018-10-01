@@ -4,9 +4,9 @@ This project aims to assist chaos engineers in thinking about creating robust UI
 
 ## Lesson Plan
 
-1.  Break 3rd party tool - just using the browser.
-2.  Break UI using attack on node service of production build keep service running
-3.  Break UI using attack on node service of production build and bring down api
+1.  Break 3rd party tool - using error boundaries.
+2.  Make NY Times fail, for real this time.
+3.  Bring down the server, keep the browser running
 
 ## Chapter 1 - Why is UI important and why may it be overlooked
 
@@ -17,11 +17,14 @@ A recent example would be the introduction of [codesandbox](https://twitter.com/
 
 ### Whats happening?
 
-* [WebAssembly](https://webassembly.org/)
-  * A target to things.
+* [WebAssembly (WASM)](https://webassembly.org/)
+  * [A new type of code](https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts) that can be run in modern browsers.
+  * A compilation target for languages languages such as C, C++ and Rust.
+  * Highly perfomant and great for 3D games, Virtual and Augmented Reality, computer vision, image/video editing
 * [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
-  * serviceworke.rs
-* [HTTP/2.0](https://en.wikipedia.org/wiki/HTTP/2)
+  * A control mechanism for caching data and redirecting network requests
+  * [serviceworke.rs](https://serviceworke.rs)
+* [HTTP/2.0](https://en.wikipedia.org/wiki/HTTP/2) \*
 * [Micro Frameworks](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
 
 ## Chapter 2 - User Experiences
@@ -50,11 +53,7 @@ Users always have a motive for loading a page in their browser. In thinking abou
 
 ![Twitter Feed](https://raw.githubusercontent.com/higgyCodes/breakable/master/public/twitter_feed.png 'A Good Degredation in Context')
 
-## Chapter 3 - Building the Dashboard
-
-Here we will build out a monitoring dashboard using widgets supplied from datadog.
-
-## Chapter 4 - Buildling Fallbacks for Critical Paths
+## Chapter 3 - Buildling Fallbacks for Critical Paths
 
 ### Third-party Assets
 
@@ -85,4 +84,3 @@ This project is licensed under the MIT License
 ## Acknowledgements
 
 * Thanks to [Tammy](https://twitter.com/tammybutow), [Ana](https://twitter.com/Ana_M_Medina/) and [Kye](https://twitter.com/tkh44)
-* Thanks to [Brian Holt](https://twitter.com/holtbt) for inspiration on the tutorial structure and acting as a sounding board regarding chaos engineering and UI
