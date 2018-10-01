@@ -28,7 +28,7 @@ A recent example would be the introduction of [codesandbox](https://twitter.com/
   * Improved Latency
     * Data compression for http headers
   * Server Push
-  * Multiplexing multiple requests over TCP connectionn
+  * Multiplexing multiple requests over TCP connection
 * [Micro Frameworks](https://speakerdeck.com/naltatis/micro-frontends-building-a-modern-webapp-with-multiple-teams)
 
 ## Chapter 2 - User Experiences
@@ -67,7 +67,11 @@ If third party assets are being used on critical flows in the user interface, th
 
 [React.js](https://reactjs.org/docs/error-boundaries.html), [Ember.js](https://guides.emberjs.com/release/routing/loading-and-error-substates/#toc_error-substates) and [Vue.js](https://vuejs.org/v2/api/#errorCaptured) and [Anglular](https://angular.io/api/core/ErrorHandler) all have error handling methods to handle catching errors and providing alternative state. Today we are going to throw some errors and see what happens!
 
-## Chapter 4 - Service Workers.
+## Chapter 4 - Request Blocking
+
+[Request Blocking](https://twitter.com/tkh44/status/1034559758546530304) can be used as a mechanism to see how your application responds to failure
+
+## Chapter 5 - Service Workers
 
 * Has to be served over HTTPS, (also works in development)
 * Normally abstracted away for development mode by default because of issues on reload
@@ -76,11 +80,11 @@ If third party assets are being used on critical flows in the user interface, th
 * The ability to [load balance](https://serviceworke.rs/load-balancer.html) based on server availability
 * Go To [https://codecupcake.com/](https://codecupcake.com/)
 
-### Chapter 5 - The Future.
+### Chapter 6 - The Future
 
-* Application Level Failure Injection to experiment with UI in Production
+* Application Level Failure to experiment with UI outcomes in production
   * The abilities to target specific clients gives us the ability to test real world scenarios with a higher degree of certainty.
-* Building Robust UI in Development.
+* Building Robust UI in development with tooling that allows UI devs to replay real-world failure modes to test against.
 
 ## Author
 
