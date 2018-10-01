@@ -67,11 +67,16 @@ If third party assets are being used on critical flows in the user interface, th
 
 [React.js](https://reactjs.org/docs/error-boundaries.html), [Ember.js](https://guides.emberjs.com/release/routing/loading-and-error-substates/#toc_error-substates) and [Vue.js](https://vuejs.org/v2/api/#errorCaptured) and [Anglular](https://angular.io/api/core/ErrorHandler) all have error handling methods to handle catching errors and providing alternative state. Today we are going to throw some errors and see what happens!
 
-## Chapter 5 - Service Workers.
+## Chapter 4 - Service Workers.
 
-https://serviceworke.rs/
+* Has to be served over HTTPS, (also works in development)
+* Normally abstracted away for development mode by default because of issues on reload
+* The ability to [retrieve cached](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers#Registering_your_worker) index.html, javascript, css assets.
+* The ability to create an [embedded fallback strategy](https://serviceworke.rs/strategy-embedded-fallback.html) if resources are unavailable
+* The ability to [load balance](https://serviceworke.rs/load-balancer.html) based on server availability
+* Go To [https://codecupcake.com/](https://codecupcake.com/)
 
-### Chapter 6 - The Future.
+### Chapter 5 - The Future.
 
 * Application Level Failure Injection to experiment with UI in Production
   * The abilities to target specific clients gives us the ability to test real world scenarios with a higher degree of certainty.
