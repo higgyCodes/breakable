@@ -13,7 +13,7 @@ This project aims to assist chaos engineers in thinking about creating robust UI
 ### Where we came from, where we are going...
 
 In the beginning we had [spacejam](https://www.warnerbros.com/archive/spacejam/movie/jam.htm) and [Bob Dole](http://www.dolekemp96.org/). These were sites that are essentially devoid of any javascript and relied on html sent from a server. The only state on a website was contained within form input fields. Compariatively, the state management concerns and the associated complexity of javascript applications today have barely any respemblance to the website experiences of yesteryear. The introduction of single page applications (SPAs) as well as dramatic increase in the capabilities of the browser mean that the state management concerns for a user session have moved in a large part, from the server to the client.
-A recent example would be the introduction of [codesandbox](https://twitter.com/CompuIves/status/1045393192114409473) which allows developers to write, share and execute code on the cloud.
+A recent example would be the introduction of [codesandbox](https://codesandbox.io/s/zk15o120xl) which allows developers to write, share and execute code on the cloud.
 
 ### Whats happening?
 
